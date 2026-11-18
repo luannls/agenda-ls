@@ -25,7 +25,7 @@
       @for (h of horarios(); track h.hora) {
         <button type="button" class="slot" [class.sel]="h.hora === hora()" [class.lotado]="h.lotado" [class.passado]="h.passado"
                 [disabled]="!h.livre" [attr.aria-pressed]="h.hora === hora()" (click)="escolherHora(h)">
-          @if (h.lotado) { <span aria-hidden="true">🔒</span> {{ h.hora }} Lotado } @else { {{ h.hora }} }
+          @if (h.lotado) { {{ h.hora }} <small class="ocupado">já reservado</small> } @else { {{ h.hora }} }
         </button>
       }
     </div>
