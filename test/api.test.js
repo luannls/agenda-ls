@@ -43,6 +43,12 @@ test('RF02: horário lotado aparece como lotado na listagem', async () => {
   assert.strictEqual(r.body.find((s) => s.hora === '09:30').lotado, true);
 });
 
+test('RNF02: telefone com +55 do preenchimento automático é aceito', async () => {
+  const { app } = setup();
+  const r = await request(app).post('/api/agendamentos').send(corpo({ whatsapp: '+55 (11) 90000-0000' }));
+  assert.strictEqual(r.status, 201);
+});
+
 test('RNF02: telefone sem DDD é recusado com mensagem que ensina a corrigir', async () => {
   const { app } = setup();
   const r = await request(app).post('/api/agendamentos').send(corpo({ whatsapp: '99999' }));

@@ -47,7 +47,7 @@
       @if (erroNome()) { <p id="erro-nome" class="msg">⚠ {{ erroNome() }}</p> }
 
       <label for="whatsapp">WhatsApp com DDD</label>
-      <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" [(ngModel)]="whatsapp" [class.erro]="erroTelefone()" [attr.aria-invalid]="!!erroTelefone()" aria-describedby="erro-tel">
+      <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" [(ngModel)]="whatsapp" [class.erro]="erroTelefone()" [attr.aria-invalid]="!!erroTelefone()" aria-describedby="erro-tel">
       @if (erroTelefone()) { <p id="erro-tel" class="msg">⚠ {{ erroTelefone() }}</p> }
 
       <p class="nota">Pedimos só nome e WhatsApp para confirmar seu horário.</p>
