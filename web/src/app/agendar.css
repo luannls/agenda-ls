@@ -36,3 +36,4 @@ input.erro { border-color: #b00020; border-width: 3px; }
 .cancelar { margin-top: 10px; min-height: 48px; width: 100%; border: 2px solid #b00020; color: #b00020; background: #fff; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; }
 .botoes .cancelar { margin-top: 0; flex: 1; }
 .sair { margin-top: 10px; width: 100%; }
+.ocupado { display: block; font-size: .8rem; font-weight: 600; }
