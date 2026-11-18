@@ -9,7 +9,9 @@ function validarNome(nome) {
 }
 function normalizarWhatsapp(v) {
   if (typeof v !== 'string') return null;
-  const d = v.replace(/\D/g, '');
+  let d = v.replace(/\D/g, '');
+  // Preenchimento automático costuma trazer o código do país (+55): remove para ficar só DDD + número.
+  if ((d.length === 12 || d.length === 13) && d.startsWith('55')) d = d.slice(2);
   return d.length === 10 || d.length === 11 ? d : null;
 }
 function validarData(d) {

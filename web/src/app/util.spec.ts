@@ -6,6 +6,12 @@ describe('util', () => {
     expect(normalizarTelefone('1130000000')).toBe('1130000000');
   });
 
+  it('remove o código do país (+55) vindo do preenchimento automático', () => {
+    expect(normalizarTelefone('+55 (11) 90000-0000')).toBe('11900000000');
+    expect(normalizarTelefone('5511900000000')).toBe('11900000000');
+    expect(normalizarTelefone('551130000000')).toBe('1130000000');
+  });
+
   it('RNF02/Tela 2: telefone sem DDD gera a mensagem que ensina a corrigir', () => {
     expect(normalizarTelefone('99999')).toBeNull();
     expect(mensagemTelefone('99999')).toContain('DDD');
