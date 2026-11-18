@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  build-e-testes:
+  api:
+    name: API (build e testes)
     runs-on: ubuntu-latest
     steps:
       - name: Baixar o código
@@ -25,5 +26,31 @@ jobs:
       - name: Auditoria de dependências
         run: npm audit --audit-level=critical
 
-      - name: Rodar testes unitários e de integração
-        run: npm test
+      - name: Testes unitários e de integração, com cobertura
+        run: npm run test:coverage
+
+  web:
+    name: Interface Angular (build e testes)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Testes da interface
+        run: npx ng test --watch=false
+
+      - name: Build de produção
+        run: npx ng build

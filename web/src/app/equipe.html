@@ -1,0 +1,47 @@
+@if (!api.token()) {
+  <section aria-labelledby="titulo-login">
+    <h2 id="titulo-login">Área da equipe</h2>
+    <form (ngSubmit)="entrar()" novalidate>
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="username" [(ngModel)]="email">
+      <label for="senha">Senha</label>
+      <input id="senha" name="senha" type="password" autocomplete="current-password" [(ngModel)]="senha">
+      @if (erro()) { <p class="alerta" role="alert">⚠ {{ erro() }}</p> }
+      <button type="submit" class="cta">Entrar</button>
+    </form>
+  </section>
+} @else {
+  <section aria-labelledby="titulo-agenda">
+    <h2 id="titulo-agenda">Agenda do dia</h2>
+    <p class="nota">{{ rotulo() }}</p>
+    <label for="dia">Dia</label>
+    <input id="dia" type="date" [ngModel]="data()" (ngModelChange)="mudarData($event)">
+    <button type="button" class="voltar sair" (click)="sair()">Sair</button>
+
+    @if (sucesso()) { <p class="ok" role="status">✔ {{ sucesso() }}</p> }
+    @if (erro()) { <p class="alerta" role="alert">⚠ {{ erro() }}</p> }
+
+    @for (item of itens(); track item.id) {
+      <article class="cartao" [class.cancelado]="item.status === 'cancelado'">
+        <div class="topo">
+          <strong>{{ item.hora }} · {{ item.cliente }}</strong>
+          @if (item.status === 'confirmado') { <span class="status conf">✔ Confirmado</span> } @else { <span class="status canc">✖ Cancelado</span> }
+        </div>
+        <div class="sub">Serviço: {{ item.servico }}</div>
+        @if (item.status === 'confirmado') {
+          @if (confirmando() === item.id) {
+            <p class="msg">Cancelar o horário das {{ item.hora }}?</p>
+            <div class="botoes">
+              <button type="button" class="voltar" (click)="desistir()">Manter</button>
+              <button type="button" class="cancelar" (click)="confirmarCancelamento(item)">Sim, cancelar</button>
+            </div>
+          } @else {
+            <button type="button" class="cancelar" (click)="pedirCancelamento(item.id)">Cancelar agendamento</button>
+          }
+        }
+      </article>
+    } @empty {
+      <p class="nota">Nenhum agendamento neste dia.</p>
+    }
+  </section>
+}

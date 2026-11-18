@@ -1,0 +1,38 @@
+:host { display: block; }
+h2 { font-size: 1.5rem; margin: 0 0 .5rem; }
+h3 { font-size: 1rem; margin: 1rem 0 .4rem; }
+.linha { display: flex; gap: 10px; }
+.chip, .dia, .slot, .voltar, .cta { font: inherit; cursor: pointer; }
+.chip { flex: 1; min-height: 48px; border: 2px solid #1f2a37; border-radius: 10px; background: #fff; font-weight: 600; font-size: 1rem; }
+.chip.sel, .dia.sel { background: #1f2a37; color: #fff; }
+.dias { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.dia { flex: 1; min-width: 52px; min-height: 56px; border: 2px solid #1f2a37; border-radius: 10px; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.dia strong { font-size: 1.25rem; }
+.slots { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.slot { min-height: 52px; border: 2px solid #0b6b3a; color: #0b6b3a; background: #fff; border-radius: 10px; font-weight: 700; font-size: 1.05rem; }
+.slot.sel { background: #0b6b3a; color: #fff; }
+.slot.lotado, .slot.passado { border: 2px dashed #6b6b6b; color: #4a4a4a; background: #e6e3de; cursor: not-allowed; font-size: .95rem; }
+.cta { margin-top: 18px; min-height: 56px; width: 100%; border: 0; border-radius: 12px; background: #b4410f; color: #fff; font-size: 1.1rem; font-weight: 700; }
+.cta:disabled { background: #8a8a8a; cursor: not-allowed; }
+.voltar { min-height: 56px; flex: 1; border: 2px solid #1f2a37; border-radius: 12px; background: #fff; color: #1f2a37; font-weight: 700; font-size: 1.05rem; }
+.botoes { display: flex; gap: 10px; margin-top: 18px; }
+.botoes .confirmar { flex: 2; margin-top: 0; }
+.resumo { background: #fff; border: 2px solid #1f2a37; border-radius: 12px; padding: 14px; margin: .5rem 0; line-height: 1.5; }
+label { display: block; font-weight: 700; margin: 16px 0 6px; }
+input { width: 100%; min-height: 52px; border: 2px solid #1f2a37; border-radius: 10px; padding: 10px 12px; font-size: 1.05rem; background: #fff; box-sizing: border-box; }
+input:focus-visible, button:focus-visible { outline: 4px solid #1a73e8; outline-offset: 2px; }
+input.erro { border-color: #b00020; border-width: 3px; }
+.msg { color: #b00020; font-weight: 700; margin: 6px 0 0; font-size: .9rem; }
+.alerta { background: #fdecea; border: 2px solid #b00020; color: #7a0014; border-radius: 10px; padding: 10px; font-weight: 700; }
+.ok { background: #e3f4ea; border: 2px solid #0b6b3a; color: #0b4a28; border-radius: 10px; padding: 12px; font-weight: 700; }
+.nota { font-size: .85rem; color: #3d3d3d; }
+.cartao { background: #fff; border: 2px solid #1f2a37; border-radius: 12px; padding: 12px; margin: 12px 0; }
+.cartao.cancelado { background: #ece9e4; }
+.topo { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 1.05rem; }
+.status { font-size: .85rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+.status.conf { background: #0b6b3a; color: #fff; }
+.status.canc { background: #fff; color: #6b2a00; border: 2px dashed #6b2a00; }
+.sub { margin-top: 6px; }
+.cancelar { margin-top: 10px; min-height: 48px; width: 100%; border: 2px solid #b00020; color: #b00020; background: #fff; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+.botoes .cancelar { margin-top: 0; flex: 1; }
+.sair { margin-top: 10px; width: 100%; }
