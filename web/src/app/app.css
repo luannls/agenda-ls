@@ -1,0 +1,6 @@
+:host { display: block; max-width: 480px; margin: 0 auto; min-height: 100vh; background: #f4f1ec; color: #1b1b1b; font-family: 'Segoe UI', Arial, sans-serif; }
+.topo-app { background: #1f2a37; color: #fff; padding: 20px; }
+.topo-app h1 { margin: 0; font-size: 1.4rem; }
+.topo-app p { margin: 4px 0 8px; color: #d7dde5; font-size: .9rem; }
+.topo-app a { color: #fff; text-decoration: underline; min-height: 44px; display: inline-block; padding: 8px 4px; }
+main { padding: 16px 20px 40px; }

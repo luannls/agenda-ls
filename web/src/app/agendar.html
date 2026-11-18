@@ -1,0 +1,71 @@
+@if (passo() === 'horario') {
+  <section aria-labelledby="titulo-horario">
+    <h2 id="titulo-horario">Agende seu horário</h2>
+    @if (aviso()) { <p class="alerta" role="alert">⚠ {{ aviso() }}</p> }
+
+    <h3>1. Escolha o barbeiro</h3>
+    <div class="linha">
+      @for (b of barbeiros(); track b.id) {
+        <button type="button" class="chip" [class.sel]="b.id === barbeiroId()" [attr.aria-pressed]="b.id === barbeiroId()" (click)="escolherBarbeiro(b.id)">{{ b.nome }}</button>
+      }
+    </div>
+
+    <h3>2. Escolha o dia</h3>
+    <div class="dias">
+      @for (d of dias; track d.iso) {
+        <button type="button" class="dia" [class.sel]="d.iso === data()" [attr.aria-pressed]="d.iso === data()" (click)="escolherDia(d.iso)">
+          <span>{{ d.semana }}</span><strong>{{ d.numero }}</strong>
+        </button>
+      }
+    </div>
+
+    <h3>3. Escolha o horário</h3>
+    @if (carregando()) { <p>Carregando horários…</p> }
+    <div class="slots">
+      @for (h of horarios(); track h.hora) {
+        <button type="button" class="slot" [class.sel]="h.hora === hora()" [class.lotado]="h.lotado" [class.passado]="h.passado"
+                [disabled]="!h.livre" [attr.aria-pressed]="h.hora === hora()" (click)="escolherHora(h)">
+          @if (h.lotado) { <span aria-hidden="true">🔒</span> {{ h.hora }} Lotado } @else { {{ h.hora }} }
+        </button>
+      }
+    </div>
+
+    <button type="button" class="cta" [disabled]="!hora()" (click)="continuar()">Continuar</button>
+    @if (hora()) { <p class="nota">Horário escolhido: {{ resumo() }}</p> }
+  </section>
+}
+
+@if (passo() === 'dados') {
+  <section aria-labelledby="titulo-dados">
+    <h2 id="titulo-dados">Confirme seus dados</h2>
+    <p class="nota">Passo 2 de 3</p>
+    <div class="resumo"><strong>Seu horário</strong><br>{{ resumo() }}</div>
+
+    <form (ngSubmit)="confirmar()" novalidate>
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" type="text" autocomplete="name" [(ngModel)]="nome" [class.erro]="erroNome()" [attr.aria-invalid]="!!erroNome()" aria-describedby="erro-nome">
+      @if (erroNome()) { <p id="erro-nome" class="msg">⚠ {{ erroNome() }}</p> }
+
+      <label for="whatsapp">WhatsApp com DDD</label>
+      <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" [(ngModel)]="whatsapp" [class.erro]="erroTelefone()" [attr.aria-invalid]="!!erroTelefone()" aria-describedby="erro-tel">
+      @if (erroTelefone()) { <p id="erro-tel" class="msg">⚠ {{ erroTelefone() }}</p> }
+
+      <p class="nota">Pedimos só nome e WhatsApp para confirmar seu horário.</p>
+      @if (aviso()) { <p class="alerta" role="alert">⚠ {{ aviso() }}</p> }
+
+      <div class="botoes">
+        <button type="button" class="voltar" (click)="voltar()">Voltar</button>
+        <button type="submit" class="cta confirmar">Confirmar agendamento</button>
+      </div>
+    </form>
+  </section>
+}
+
+@if (passo() === 'pronto') {
+  <section aria-labelledby="titulo-pronto">
+    <h2 id="titulo-pronto">Agendamento confirmado</h2>
+    <p class="ok" role="status">✔ Tudo certo! Seu horário está reservado.</p>
+    <div class="resumo">{{ resumo() }}</div>
+    <button type="button" class="cta" (click)="novo()">Fazer novo agendamento</button>
+  </section>
+}
